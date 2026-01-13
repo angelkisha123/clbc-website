@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-html{
+html {
   scroll-behavior: smooth;
 }
 :root {
@@ -37,4 +37,52 @@ body {
 }
 .font-playlist {
   font-family: "Playlist", cursive;
+}
+
+@keyframes orbSlow {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(40px, -60px) scale(1.1);
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+@keyframes orbMedium {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-60px, 40px) scale(1.15);
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+@keyframes orbFast {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(30px, 30px) scale(1.2);
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+.animate-orb-slow {
+  animation: orbSlow 20s ease-in-out infinite;
+}
+
+.animate-orb-medium {
+  animation: orbMedium 16s ease-in-out infinite;
+}
+
+.animate-orb-fast {
+  animation: orbFast 12s ease-in-out infinite;
 }
