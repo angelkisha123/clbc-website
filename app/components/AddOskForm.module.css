@@ -1,0 +1,233 @@
+/* ================= Layout ================= */
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* ================= Field ================= */
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #94a3b8;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* ================= Inputs ================= */
+
+.input {
+  width: 100%;
+  padding: 0.7rem 0.9rem;
+  border-radius: 0.65rem;
+  background: #020617;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: white;
+  font-size: 0.85rem;
+}
+
+textarea.input {
+  min-height: 90px;
+  resize: vertical;
+  line-height: 1.55;
+}
+
+.input:focus {
+  border-color: #22d3ee;
+  box-shadow: 0 0 0 2px rgba(34, 211, 238, 0.25);
+}
+
+/* ================= Upload ================= */
+
+.upload {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 140px;
+  border-radius: 1rem;
+  border: 2px dashed rgba(255, 255, 255, 0.15);
+  background: rgba(2, 6, 23, 0.7);
+  cursor: pointer;
+  gap: 0.25rem;
+}
+
+/* ================= Block Picker ================= */
+
+.blockPicker {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.6rem;
+}
+
+.blockPicker button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 0.6rem;
+  border-radius: 0.6rem;
+  background: #020617;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #e5e7eb;
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+
+.blockPicker button:hover {
+  background: rgba(34, 211, 238, 0.1);
+  border-color: #22d3ee;
+}
+
+/* ================= Sortable ================= */
+
+.sortable {
+  position: relative;
+  margin-bottom: 0.75rem;
+}
+
+.dragHandle {
+  position: absolute;
+  left: -26px;
+  top: 16px;
+  cursor: grab;
+  color: #64748b;
+}
+
+/* ================= Block ================= */
+
+.block {
+  background: rgba(2, 6, 23, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.9rem;
+  padding: 0.85rem;
+}
+
+.blockHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.6rem;
+}
+
+.blockHeader strong {
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: #67e8f9;
+  text-transform: uppercase;
+}
+
+.blockBody {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+/* ================= Point Title ================= */
+
+.pointTitle {
+  padding: 0.75rem 0.9rem;
+  border-radius: 0.65rem;
+  background: rgba(34, 211, 238, 0.08);
+  border: 1px solid rgba(34, 211, 238, 0.35);
+  font-weight: 600;
+  color: #e0f2fe;
+}
+
+/* ================= Verse Group ================= */
+
+.verseGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding-top: 0.4rem;
+}
+
+/* ================= Buttons ================= */
+
+.smallButton {
+  align-self: flex-start;
+  padding: 0.35rem 0.7rem;
+  font-size: 0.7rem;
+  border-radius: 0.45rem;
+  background: rgba(34, 211, 238, 0.15);
+  border: 1px solid rgba(34, 211, 238, 0.4);
+  color: #67e8f9;
+  cursor: pointer;
+}
+
+.submit {
+  margin-top: 1rem;
+  align-self: center;
+  padding: 0.75rem 1.8rem;
+  border-radius: 0.75rem;
+  background: linear-gradient(90deg, #22d3ee, #2563eb);
+  color: black;
+  font-weight: 600;
+  font-size: 0.85rem;
+  border: none;
+  cursor: pointer;
+}
+
+/* ================= Error ================= */
+
+.error {
+  color: #f87171;
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+/* ================= Sticky Toolbar ================= */
+
+.toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(2, 6, 23, 0.95);
+  backdrop-filter: blur(8px);
+  padding: 0.75rem;
+  border-radius: 0.9rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.6rem;
+}
+
+.toolbar button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 0.6rem;
+  border-radius: 0.6rem;
+  background: #020617;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #e5e7eb;
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+
+.toolbar button:hover {
+  background: rgba(34, 211, 238, 0.1);
+  border-color: #22d3ee;
+}
+
+/* ================= Points Title ================= */
+
+.pointsTitle {
+  padding: 0.8rem 1rem;
+  border-radius: 0.75rem;
+  background: rgba(14, 165, 233, 0.12);
+  border: 1px solid rgba(14, 165, 233, 0.45);
+  color: #e0f2fe;
+  font-weight: 700;
+  font-size: 0.9rem;
+}

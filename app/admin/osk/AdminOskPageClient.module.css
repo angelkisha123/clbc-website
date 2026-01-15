@@ -1,0 +1,151 @@
+/* Background layers */
+.background {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #000, #020617, #000);
+  pointer-events: none;
+}
+
+.blurPurple {
+  position: absolute;
+  top: 6rem;
+  left: 5rem;
+  width: 18rem;
+  height: 18rem;
+  background: rgba(168, 85, 247, 0.1);
+  filter: blur(120px);
+  pointer-events: none;
+}
+
+.blurCyan {
+  position: absolute;
+  bottom: 6rem;
+  right: 5rem;
+  width: 18rem;
+  height: 18rem;
+  background: rgba(34, 211, 238, 0.1);
+  filter: blur(120px);
+  pointer-events: none;
+}
+
+/* Add button */
+.addButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.25rem;
+  border-radius: 0.75rem;
+  background: linear-gradient(90deg, #22d3ee, #2563eb);
+  color: #000;
+  font-size: 0.875rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.addButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0px 20px rgba(34, 211, 238, 0.4);
+}
+
+/* Table wrapper */
+.tableWrapper {
+  overflow: hidden;
+  border-radius: 1.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(12px);
+}
+
+/* Table */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+/* Header */
+.table thead tr {
+  background: rgba(15, 23, 42, 0.8);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.th {
+  padding: 1.25rem 2rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #94a3b8;
+}
+
+.th span {
+  display: inline-block;
+  padding: 0.4rem 0.75rem;
+  border-radius: 0.5rem;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Rows */
+.tr {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  transition: background 0.2s ease;
+}
+
+.tr:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Cells */
+.td {
+  padding: 1.5rem 2rem;
+  vertical-align: middle;
+}
+
+.episodeBadge {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 9999px;
+  background: rgba(34, 211, 238, 0.12);
+  color: #67e8f9;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.title {
+  color: #e5e7eb;
+  font-weight: 500;
+}
+
+.date {
+  color: #94a3b8;
+  text-align: center;
+}
+
+/* Actions */
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.iconButton {
+  padding: 0.75rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.iconButton:hover {
+  transform: scale(1.05);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.delete:hover {
+  background: rgba(239, 68, 68, 0.2);
+}

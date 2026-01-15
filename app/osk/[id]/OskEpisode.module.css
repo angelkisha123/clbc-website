@@ -1,0 +1,136 @@
+/* ================= Layout ================= */
+
+.wrapper {
+  position: relative;
+  max-width: 42rem;
+  margin: 0 auto;
+}
+
+/* ================= Header ================= */
+
+.episodeNumber {
+  font-size: 0.85rem;
+  color: #9ca3af;
+  letter-spacing: 0.12em;
+  align-self: center;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+
+.title {
+  font-size: 2.4rem;
+  font-weight: 600;
+  line-height: 1.15;
+  margin-bottom: 1.5rem;
+  color: #ffffff;
+  text-align: center;
+}
+
+.divider {
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255, 255, 255, 0.35),
+    transparent
+  );
+}
+
+/* ================= Intro ================= */
+
+.intro {
+  margin: 2.5rem 0;
+  padding: 1.5rem 1.75rem;
+  background: linear-gradient(
+    135deg,
+    rgba(14, 165, 233, 0.12),
+    rgba(236, 72, 153, 0.08)
+  );
+  border-left: 4px solid #22d3ee;
+  border-radius: 1rem;
+  color: #e5e7eb;
+  font-size: 1.05rem;
+  line-height: 1.8;
+}
+
+/* ================= Points Title ================= */
+
+.pointsTitle {
+  font-size: 1.55rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 3.5rem 0 2rem;
+  padding-left: 0.85rem;
+  border-left: 5px solid #22d3ee;
+}
+
+/* ================= Point ================= */
+
+.point {
+  background: linear-gradient(
+    to bottom right,
+    rgba(2, 6, 23, 0.85),
+    rgba(15, 23, 42, 0.85)
+  );
+  border-radius: 1.1rem;
+  padding: 1.75rem;
+  margin-bottom: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+}
+
+.pointTitle {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 1.25rem;
+}
+
+/* ================= Verse ================= */
+
+.verse {
+  border-left: 3px solid rgba(34, 211, 238, 0.45);
+  padding-left: 1rem;
+  margin-bottom: 1.25rem;
+  font-style: italic;
+}
+
+.verseReference {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #cbd5f5;
+  margin-bottom: 0.25rem;
+}
+
+.verseText {
+  color: #9ca3af;
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+/* ================= Standalone Verse ================= */
+
+.standaloneVerse {
+  margin: 2.5rem 0;
+  padding-left: 1.25rem;
+}
+
+/* ================= Conclusion ================= */
+
+.conclusion {
+  margin-top: 4rem;
+  padding: 2rem 1.75rem;
+  background: linear-gradient(
+    135deg,
+    rgba(236, 72, 153, 0.1),
+    rgba(14, 165, 233, 0.08)
+  );
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 1rem;
+  color: #f1f5f9;
+  font-style: italic;
+  font-size: 1.05rem;
+  line-height: 1.8;
+}
