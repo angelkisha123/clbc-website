@@ -145,7 +145,7 @@ export default function AddOskForm({ onSuccess }: { onSuccess: () => void }) {
     }
 
     if (!oskNumber || !title) {
-      setError("Episode number and title are required.");
+      setError("Lesson number and title are required.");
       return;
     }
 
@@ -188,25 +188,25 @@ export default function AddOskForm({ onSuccess }: { onSuccess: () => void }) {
 
   return (
     <form className={styles.form}>
-      {/* Episode meta */}
+      {/* Lesson meta */}
       <input
         className={styles.input}
         type="number"
-        placeholder="Episode Number"
+        placeholder="Lesson Number"
         value={oskNumber}
         onChange={(e) => setOskNumber(e.target.value)}
       />
 
       <input
         className={styles.input}
-        placeholder="Episode Title"
+        placeholder="Lesson Title"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
       />
 
       {/* Image upload (NOT sticky) */}
       <div className={styles.field}>
-        <label className={styles.label}>Episode Image</label>
+        <label className={styles.label}>Lesson Image</label>
         <label className={styles.upload}>
           <Upload size={18} />
           <span>{image ? image.name : "Click to upload image"}</span>
@@ -289,7 +289,7 @@ export default function AddOskForm({ onSuccess }: { onSuccess: () => void }) {
         onClick={handleSubmit}
         disabled={loading}
       >
-        {loading ? "Saving…" : "Save Episode"}
+        {loading ? "Saving…" : "Save Lesson"}
       </button>
     </form>
   );

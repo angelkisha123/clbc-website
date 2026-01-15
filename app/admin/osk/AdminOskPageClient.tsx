@@ -7,7 +7,7 @@ import Modal from "@/app/components/Modal";
 import AddOskForm from "@/app/components/AddOskForm";
 import styles from "./AdminOskPageClient.module.css";
 
-type Episode = {
+type Lesson = {
   id: string;
   osk_number: number;
   title: string;
@@ -15,15 +15,15 @@ type Episode = {
 };
 
 export default function AdminOskPageClient({
-  episodes,
+  lessons,
 }: {
-  episodes: Episode[];
+  lessons: Lesson[];
 }) {
   const [open, setOpen] = useState(false);
 
-  const sortedEpisodes = useMemo(
-    () => [...episodes].sort((a, b) => a.osk_number - b.osk_number),
-    [episodes]
+  const sortedLessons = useMemo(
+    () => [...lessons].sort((a, b) => a.osk_number - b.osk_number),
+    [lessons]
   );
 
   return (
@@ -40,26 +40,26 @@ export default function AdminOskPageClient({
         <div className="flex items-center justify-between mb-5">
           <div>
             <h1 className="text-4xl font-semibold tracking-tight">
-              OSK Episodes
+              OSK Lessons
             </h1>
             <p className="text-slate-400 text-sm mt-2">
-              Manage episodes and content
+              Manage lessons and content
             </p>
           </div>
 
           <button onClick={() => setOpen(true)} className={styles.addButton}>
             <Plus size={18} />
-            Add Episode
+            Add Lesson
           </button>
         </div>
 
         {/* Table */}
-        {sortedEpisodes.length > 0 && (
+        {sortedLessons.length > 0 && (
           <div className={styles.tableWrapper}>
             <table className={styles.table}>
               <thead>
                 <tr>
-                  {["Episode", "Title", "Created", "Actions"].map((label) => (
+                  {["Lesson", "Title", "Created", "Actions"].map((label) => (
                     <th key={label} className={styles.th}>
                       <span>{label}</span>
                     </th>
@@ -68,10 +68,10 @@ export default function AdminOskPageClient({
               </thead>
 
               <tbody>
-                {sortedEpisodes.map((ep) => (
+                {sortedLessons.map((ep) => (
                   <tr key={ep.id} className={styles.tr}>
                     <td className={styles.td} align="center">
-                      <span className={styles.episodeBadge}>
+                      <span className={styles.lessonBadge}>
                         {ep.osk_number}
                       </span>
                     </td>
@@ -111,7 +111,7 @@ export default function AdminOskPageClient({
         <Modal
           open={open}
           onClose={() => setOpen(false)}
-          title="Add OSK Episode"
+          title="Add OSK Lesson"
         >
           <AddOskForm
             onSuccess={() => {

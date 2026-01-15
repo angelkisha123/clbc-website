@@ -4,7 +4,7 @@ import { supabaseServer } from "@/lib/supabase-server";
 import Link from "next/link";
 
 export default async function OskPage() {
-  const { data: episodes, error } = await supabaseServer
+  const { data: lessons, error } = await supabaseServer
     .from("osk")
     .select("id, osk_number, title, image_url")
     .eq("published", true)
@@ -28,9 +28,9 @@ export default async function OskPage() {
           </p>
         </div>
 
-        {/* Episodes Grid */}
+        {/* Lessons Grid */}
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
-          {episodes?.map((ep) => (
+          {lessons?.map((ep) => (
             <Link
               key={ep.id}
               href={`/osk/${ep.osk_number}`}
@@ -79,7 +79,7 @@ export default async function OskPage() {
                     group-hover:text-cyan-200
                   "
                 >
-                  View episode
+                  View lesson
                   <span className="transition-transform duration-300 group-hover:translate-x-1">
                     →
                   </span>

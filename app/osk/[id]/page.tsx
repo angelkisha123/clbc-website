@@ -1,9 +1,9 @@
 import { supabaseServer } from "@/lib/supabase-server";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import styles from "./OskEpisode.module.css";
+import styles from "./OskLesson.module.css";
 
-export default async function OskEpisode({
+export default async function OskLesson({
   params,
 }: {
   params: Promise<{ id: string }>;
@@ -13,13 +13,13 @@ export default async function OskEpisode({
   const oskNumber = Number(id);
   if (Number.isNaN(oskNumber)) return notFound();
 
-  const { data: episode, error } = await supabaseServer
+  const { data: lesson, error } = await supabaseServer
     .from("osk")
     .select("*")
     .eq("osk_number", oskNumber)
     .single();
 
-  if (error || !episode) return notFound();
+  if (error || !lesson) return notFound();
 
   return (
     <section className="relative min-h-screen bg-slate-950 text-white py-24 px-6 overflow-hidden">
@@ -33,21 +33,21 @@ export default async function OskEpisode({
           href="/osk"
           className="inline-block mb-10 text-sm text-gray-400 hover:text-white"
         >
-          ← Back to Episodes
+          ← Back to Lessons
         </Link>
 
         {/* Header */}
         <header className="osk-page-header">
-          <p className={styles.episodeNumber}>OSK {episode.osk_number}</p>
+          <p className={styles.lessonNumber}>OSK {lesson.osk_number}</p>
 
-          <h1 className={styles.title}>{episode.title}</h1>
+          <h1 className={styles.title}>{lesson.title}</h1>
 
           <div className={styles.divider} />
         </header>
 
         {/* Content */}
         <main>
-          {episode.content_blocks?.map((block: any, i: number) => {
+          {lesson.content_blocks?.map((block: any, i: number) => {
             if (block.type === "intro") {
               return (
                 <div key={i} className={styles.intro}>

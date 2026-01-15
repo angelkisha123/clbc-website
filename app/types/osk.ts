@@ -1,4 +1,4 @@
-export type Episode = {
+export type Lesson = {
   id: string;
   osk_number: number;
   title: string;

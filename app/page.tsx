@@ -720,7 +720,7 @@ export default function Home() {
     transition-[background-position] duration-700 ease-in-out
   "
           >
-            View All Episodes
+            View All Lessons
           </Link>
         </div>
       </section>
