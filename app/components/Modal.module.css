@@ -30,6 +30,7 @@
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45);
   overflow: hidden;
   animation: modalIn 0.25s ease-out;
+  margin-top: 50px;
 }
 
 
@@ -38,7 +39,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1.5rem 2rem;
+  padding: .75rem 2rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -65,7 +66,7 @@
 }
 
 .body {
-  padding: 2rem;
+  padding: 1rem 2rem;
   max-height: 80vh;
   overflow-y: auto;
   background: rgba(255, 255, 255, 0.02);
