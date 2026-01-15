@@ -2,7 +2,7 @@
 
 .wrapper {
   position: relative;
-  max-width: 42rem;
+  max-width: 80rem;
   margin: 0 auto;
 }
 
@@ -30,6 +30,7 @@
 .divider {
   height: 1px;
   width: 100%;
+  margin-top: 2rem;
   background: linear-gradient(
     to right,
     transparent,

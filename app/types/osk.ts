@@ -5,4 +5,5 @@ export type Lesson = {
   image_url?: string | null;
   published?: boolean;
   created_at?: string;
+  facebook_url?: string | null;
 };

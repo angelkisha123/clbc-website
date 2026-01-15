@@ -1,30 +1,25 @@
-/* Background layers */
+/* ================= Background ================= */
+
 .background {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, #000, #020617, #000);
-  pointer-events: none;
-}
-
-.blurPurple {
-  position: absolute;
-  top: 6rem;
-  left: 5rem;
-  width: 18rem;
-  height: 18rem;
-  background: rgba(168, 85, 247, 0.1);
-  filter: blur(120px);
-  pointer-events: none;
-}
-
-.blurCyan {
-  position: absolute;
-  bottom: 6rem;
-  right: 5rem;
-  width: 18rem;
-  height: 18rem;
-  background: rgba(34, 211, 238, 0.1);
-  filter: blur(120px);
+  background:
+    radial-gradient(
+      circle at top,
+      rgba(34, 211, 238, 0.08),
+      transparent 45%
+    ),
+    radial-gradient(
+      circle at bottom,
+      rgba(168, 85, 247, 0.08),
+      transparent 45%
+    ),
+    linear-gradient(
+      180deg,
+      #020617 0%,
+      #020617 40%,
+      #000000 100%
+    );
   pointer-events: none;
 }
 
@@ -55,7 +50,7 @@
   border-radius: 1.75rem;
   border: 1px solid rgba(255, 255, 255, 0.1);
   background: rgba(15, 23, 42, 0.6);
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(10px);
 }
 
 /* Table */
@@ -147,5 +142,5 @@
 }
 
 .delete:hover {
-  background: rgba(239, 68, 68, 0.2);
+  background: rgba(185, 6, 6, 0.4);
 }

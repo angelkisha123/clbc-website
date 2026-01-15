@@ -22,7 +22,7 @@ export default async function OskLesson({
   if (error || !lesson) return notFound();
 
   return (
-    <section className="relative min-h-screen bg-slate-950 text-white py-24 px-6 overflow-hidden">
+    <section className="relative min-h-screen bg-slate-950 text-white px-6 overflow-hidden" style={{ paddingTop: "20px", paddingBottom: "50px" }}>
       {/* Background */}
       <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.04)_1px,transparent_1px)] bg-[size:18px_18px] pointer-events-none" />
       <div className="absolute -top-40 -left-40 w-96 h-96 bg-pink-500/15 blur-[140px]" />
@@ -41,6 +41,27 @@ export default async function OskLesson({
           <p className={styles.lessonNumber}>OSK {lesson.osk_number}</p>
 
           <h1 className={styles.title}>{lesson.title}</h1>
+          {lesson.facebook_url && (
+            <div style={{ marginTop: "1.5rem", textAlign: "center" }}>
+              <a
+                href={lesson.facebook_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: "inline-block",
+                  padding: "0.2rem 1.5rem",
+                  borderRadius: "999px",
+                  background: "linear-gradient(90deg, #1877f2, #3b82f6)",
+                  color: "white",
+                  fontWeight: 600,
+                  fontSize: "0.9rem",
+                  textDecoration: "none",
+                }}
+              >
+                ▶ Watch on Facebook
+              </a>
+            </div>
+          )}
 
           <div className={styles.divider} />
         </header>

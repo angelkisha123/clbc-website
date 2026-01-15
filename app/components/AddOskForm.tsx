@@ -112,7 +112,7 @@ export default function AddOskForm({ onSuccess }: { onSuccess: () => void }) {
   const [blocks, setBlocks] = useState<Block[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
+  const [facebookUrl, setFacebookUrl] = useState("");
   /* ---------- Drag ---------- */
 
   const handleDragEnd = (event: any) => {
@@ -172,6 +172,7 @@ export default function AddOskForm({ onSuccess }: { onSuccess: () => void }) {
         osk_number: Number(oskNumber),
         title,
         image_url: imageUrl,
+        facebook_url: facebookUrl || null,
         published: true,
         content_blocks: blocks.map(({ id, ...rest }) => rest),
       });
@@ -202,6 +203,12 @@ export default function AddOskForm({ onSuccess }: { onSuccess: () => void }) {
         placeholder="Lesson Title"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
+      />
+      <input
+        className={styles.input}
+        placeholder="Facebook Video Link (optional)"
+        value={facebookUrl}
+        onChange={(e) => setFacebookUrl(e.target.value)}
       />
 
       {/* Image upload (NOT sticky) */}
@@ -307,7 +314,6 @@ function BlockEditor({
   onDelete: () => void;
 }) {
   const [collapsed, setCollapsed] = useState(false);
-
   return (
     <div className={styles.block}>
       <div className={styles.blockHeader}>

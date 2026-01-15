@@ -11,7 +11,7 @@ export default async function OskPage() {
     .order("osk_number", { ascending: true });
 
   return (
-    <section className="relative min-h-screen bg-gradient-to-b from-slate-950 via-black to-slate-950 text-white py-24 px-6 overflow-hidden">
+    <section className="relative min-h-screen bg-gradient-to-b from-slate-950 via-black to-slate-950 text-white px-6 overflow-hidden" style={{ paddingTop: "50px", paddingBottom: "50px" }}>
       {/* subtle background texture */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(236,72,153,0.08),transparent_45%)] pointer-events-none" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom,rgba(34,211,238,0.06),transparent_45%)] pointer-events-none" />

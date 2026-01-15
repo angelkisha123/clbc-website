@@ -12,13 +12,10 @@ type Lesson = {
   osk_number: number;
   title: string;
   created_at: string;
+  facebook_url: string | null;
 };
 
-export default function AdminOskPageClient({
-  lessons,
-}: {
-  lessons: Lesson[];
-}) {
+export default function AdminOskPageClient({ lessons }: { lessons: Lesson[] }) {
   const [open, setOpen] = useState(false);
 
   const sortedLessons = useMemo(
@@ -28,14 +25,12 @@ export default function AdminOskPageClient({
 
   return (
     <section
-      className="relative min-h-screen text-white px-6"
-      style={{ paddingTop: "25px" }}
+      className="relative min-h-screen text-white px-6 overflow-hidden"
+      style={{ paddingTop: "25px", paddingBottom: "50px" }}
     >
       <div className={styles.background} />
-      <div className={styles.blurPurple} />
-      <div className={styles.blurCyan} />
 
-      <div className="relative max-w-6xl mx-auto">
+      <div className="relative z-10 max-w-6xl mx-auto">
         {/* Header */}
         <div className="flex items-center justify-between mb-5">
           <div>
@@ -59,11 +54,13 @@ export default function AdminOskPageClient({
             <table className={styles.table}>
               <thead>
                 <tr>
-                  {["Lesson", "Title", "Created", "Actions"].map((label) => (
-                    <th key={label} className={styles.th}>
-                      <span>{label}</span>
-                    </th>
-                  ))}
+                  {["Lesson", "Title", "Facebook", "Created", "Actions"].map(
+                    (label) => (
+                      <th key={label} className={styles.th}>
+                        <span>{label}</span>
+                      </th>
+                    )
+                  )}
                 </tr>
               </thead>
 
@@ -78,6 +75,23 @@ export default function AdminOskPageClient({
 
                     <td className={styles.td}>
                       <p className={styles.title}>{ep.title}</p>
+                    </td>
+
+                    <td className={styles.td} style={{ textAlign: "center" }}>
+                      {ep.facebook_url ? (
+                        <a
+                          href={ep.facebook_url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          style={{ color: "#60a5fa", fontSize: "0.85rem" }}
+                        >
+                          View
+                        </a>
+                      ) : (
+                        <span style={{ color: "#64748b", fontSize: "0.8rem" }}>
+                          —
+                        </span>
+                      )}
                     </td>
 
                     <td className={`${styles.td} ${styles.date}`}>
