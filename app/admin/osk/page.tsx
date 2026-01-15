@@ -6,7 +6,8 @@ import AdminOskPageClient from "./AdminOskPageClient";
 export default async function AdminOskPage() {
   const { data: lessons, error } = await supabaseServer
     .from("osk")
-    .select("id, osk_number, title, created_at, facebook_url")
+    .select("id, osk_number, title, created_at, facebook_url, content_blocks")
+    .is("deleted_at", null)
     .order("osk_number", { ascending: true });
 
   if (error) {

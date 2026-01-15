@@ -8,6 +8,7 @@ export default async function OskPage() {
     .from("osk")
     .select("id, osk_number, title, image_url")
     .eq("published", true)
+    .is("deleted_at", null)
     .order("osk_number", { ascending: true });
 
   return (

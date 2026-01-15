@@ -22,6 +22,7 @@ import {
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+import { useRouter } from "next/navigation";
 
 /* ================= Types ================= */
 
@@ -37,39 +38,47 @@ type Block =
   | { id: string; type: "point"; title: string; verses: Verse[] }
   | { id: string; type: "conclusion"; text: string };
 
+type AddOskFormProps = {
+  initialData?: {
+    id: string;
+    osk_number: number;
+    title: string;
+    facebook_url: string | null;
+    content_blocks: any[];
+  };
+  onSuccess?: () => void;
+};
+
 /* ================= Block Factory ================= */
 
-const BLOCKS: Record<
-  "intro" | "verse" | "points_title" | "point" | "conclusion",
-  () => Block
-> = {
-  intro: () => ({
+const BLOCKS = {
+  intro: (): Block => ({
     id: crypto.randomUUID(),
     type: "intro",
     text: "",
   }),
 
-  verse: () => ({
+  verse: (): Block => ({
     id: crypto.randomUUID(),
     type: "verse",
     reference: "",
     text: "",
   }),
 
-  points_title: () => ({
+  points_title: (): Block => ({
     id: crypto.randomUUID(),
     type: "points_title",
     title: "",
   }),
 
-  point: () => ({
+  point: (): Block => ({
     id: crypto.randomUUID(),
     type: "point",
     title: "",
     verses: [{ reference: "", text: "" }],
   }),
 
-  conclusion: () => ({
+  conclusion: (): Block => ({
     id: crypto.randomUUID(),
     type: "conclusion",
     text: "",
@@ -105,14 +114,36 @@ function SortableBlock({
 
 /* ================= Main Form ================= */
 
-export default function AddOskForm({ onSuccess }: { onSuccess: () => void }) {
-  const [oskNumber, setOskNumber] = useState("");
-  const [title, setTitle] = useState("");
+export default function AddOskForm({
+  initialData,
+  onSuccess,
+}: AddOskFormProps) {
+  const router = useRouter();
+  /* ---------- State ---------- */
+
+  const [oskNumber, setOskNumber] = useState(
+    initialData ? String(initialData.osk_number) : ""
+  );
+
+  const [title, setTitle] = useState(initialData?.title ?? "");
+  const [facebookUrl, setFacebookUrl] = useState(
+    initialData?.facebook_url ?? ""
+  );
+
   const [image, setImage] = useState<File | null>(null);
-  const [blocks, setBlocks] = useState<Block[]>([]);
+
+  const [blocks, setBlocks] = useState<Block[]>(
+    initialData?.content_blocks?.length
+      ? (initialData.content_blocks ?? []).map((b: any) => ({
+          id: crypto.randomUUID(),
+          ...b,
+        }))
+      : []
+  );
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [facebookUrl, setFacebookUrl] = useState("");
+
   /* ---------- Drag ---------- */
 
   const handleDragEnd = (event: any) => {
@@ -132,17 +163,6 @@ export default function AddOskForm({ onSuccess }: { onSuccess: () => void }) {
 
   const handleSubmit = async () => {
     setError(null);
-    const { data: existing } = await supabase
-      .from("osk")
-      .select("id")
-      .eq("osk_number", Number(oskNumber))
-      .maybeSingle();
-
-    if (existing) {
-      setError(`OSK number ${oskNumber} already exists.`);
-      setLoading(false);
-      return;
-    }
 
     if (!oskNumber || !title) {
       setError("Lesson number and title are required.");
@@ -154,31 +174,56 @@ export default function AddOskForm({ onSuccess }: { onSuccess: () => void }) {
     try {
       let imageUrl: string | null = null;
 
+      // Upload image (only if a new one was selected)
       if (image) {
         const ext = image.name.split(".").pop();
         const path = `osk/${Date.now()}.${ext}`;
 
-        const { error } = await supabase.storage
+        const { error: uploadError } = await supabase.storage
           .from("osk-images")
           .upload(path, image);
 
-        if (error) throw error;
+        if (uploadError) throw uploadError;
 
         imageUrl = supabase.storage.from("osk-images").getPublicUrl(path)
           .data.publicUrl;
       }
 
-      await supabase.from("osk").insert({
+      const payload = {
         osk_number: Number(oskNumber),
         title,
-        image_url: imageUrl,
         facebook_url: facebookUrl || null,
-        published: true,
         content_blocks: blocks.map(({ id, ...rest }) => rest),
+        ...(imageUrl ? { image_url: imageUrl } : {}),
+      };
+
+      console.log("Submitting OSK:", {
+        mode: initialData ? "EDIT" : "ADD",
+        id: initialData?.id,
+        payload,
       });
 
-      onSuccess();
+      if (initialData) {
+        // ✅ EDIT
+        const { error } = await supabase
+          .from("osk")
+          .update(payload)
+          .eq("id", initialData.id);
+
+        if (error) throw error;
+      } else {
+        // ✅ ADD
+        const { error } = await supabase.from("osk").insert({
+          ...payload,
+          published: true,
+        });
+
+        if (error) throw error;
+      }
+
+      onSuccess?.();
     } catch (err: any) {
+      console.error("OSK submit error:", err);
       setError(err.message ?? "Something went wrong");
     } finally {
       setLoading(false);
@@ -189,7 +234,6 @@ export default function AddOskForm({ onSuccess }: { onSuccess: () => void }) {
 
   return (
     <form className={styles.form}>
-      {/* Lesson meta */}
       <input
         className={styles.input}
         type="number"
@@ -204,6 +248,7 @@ export default function AddOskForm({ onSuccess }: { onSuccess: () => void }) {
         value={title}
         onChange={(e) => setTitle(e.target.value)}
       />
+
       <input
         className={styles.input}
         placeholder="Facebook Video Link (optional)"
@@ -211,7 +256,7 @@ export default function AddOskForm({ onSuccess }: { onSuccess: () => void }) {
         onChange={(e) => setFacebookUrl(e.target.value)}
       />
 
-      {/* Image upload (NOT sticky) */}
+      {/* Image upload */}
       <div className={styles.field}>
         <label className={styles.label}>Lesson Image</label>
         <label className={styles.upload}>
@@ -226,7 +271,7 @@ export default function AddOskForm({ onSuccess }: { onSuccess: () => void }) {
         </label>
       </div>
 
-      {/* Sticky content toolbar */}
+      {/* Toolbar */}
       <div className={styles.toolbar}>
         <button
           type="button"
@@ -234,28 +279,24 @@ export default function AddOskForm({ onSuccess }: { onSuccess: () => void }) {
         >
           <BookOpen size={14} /> Intro
         </button>
-
         <button
           type="button"
           onClick={() => setBlocks([...blocks, BLOCKS.verse()])}
         >
           <Quote size={14} /> Verse
         </button>
-
         <button
           type="button"
           onClick={() => setBlocks([...blocks, BLOCKS.points_title()])}
         >
           <Layers size={14} /> Points Title
         </button>
-
         <button
           type="button"
           onClick={() => setBlocks([...blocks, BLOCKS.point()])}
         >
           <List size={14} /> Point
         </button>
-
         <button
           type="button"
           onClick={() => setBlocks([...blocks, BLOCKS.conclusion()])}
@@ -264,7 +305,7 @@ export default function AddOskForm({ onSuccess }: { onSuccess: () => void }) {
         </button>
       </div>
 
-      {/* Blocks editor */}
+      {/* Blocks */}
       <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
         <SortableContext
           items={blocks.map((b) => b.id)}
@@ -296,7 +337,7 @@ export default function AddOskForm({ onSuccess }: { onSuccess: () => void }) {
         onClick={handleSubmit}
         disabled={loading}
       >
-        {loading ? "Saving…" : "Save Lesson"}
+        {loading ? "Saving…" : initialData ? "Update Lesson" : "Save Lesson"}
       </button>
     </form>
   );
@@ -314,6 +355,7 @@ function BlockEditor({
   onDelete: () => void;
 }) {
   const [collapsed, setCollapsed] = useState(false);
+
   return (
     <div className={styles.block}>
       <div className={styles.blockHeader}>
@@ -360,48 +402,37 @@ function BlockEditor({
           {block.type === "points_title" && (
             <input
               className={styles.pointsTitle}
-              placeholder="Points Section Title (e.g. Key Teachings)"
+              placeholder="Points Section Title"
               value={block.title}
               onChange={(e) => onChange({ ...block, title: e.target.value })}
             />
           )}
 
-          {block.type === "point" && (
-            <>
-              <input
-                className={styles.input}
-                placeholder="Point Title"
-                value={block.title}
-                onChange={(e) => onChange({ ...block, title: e.target.value })}
-              />
-
-              {block.verses.map((v, i) => (
-                <div key={i} className={styles.verseGroup}>
-                  <input
-                    className={styles.input}
-                    placeholder="Verse Reference"
-                    value={v.reference}
-                    onChange={(e) => {
-                      const verses = [...block.verses];
-                      verses[i].reference = e.target.value;
-                      onChange({ ...block, verses });
-                    }}
-                  />
-
-                  <textarea
-                    className={styles.input}
-                    placeholder="Verse Text"
-                    value={v.text}
-                    onChange={(e) => {
-                      const verses = [...block.verses];
-                      verses[i].text = e.target.value;
-                      onChange({ ...block, verses });
-                    }}
-                  />
-                </div>
-              ))}
-            </>
-          )}
+          {block.type === "point" &&
+            block.verses.map((v, i) => (
+              <div key={i} className={styles.verseGroup}>
+                <input
+                  className={styles.input}
+                  placeholder="Verse Reference"
+                  value={v.reference}
+                  onChange={(e) => {
+                    const verses = [...block.verses];
+                    verses[i].reference = e.target.value;
+                    onChange({ ...block, verses });
+                  }}
+                />
+                <textarea
+                  className={styles.input}
+                  placeholder="Verse Text"
+                  value={v.text}
+                  onChange={(e) => {
+                    const verses = [...block.verses];
+                    verses[i].text = e.target.value;
+                    onChange({ ...block, verses });
+                  }}
+                />
+              </div>
+            ))}
         </div>
       )}
     </div>

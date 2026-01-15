@@ -6,6 +6,7 @@ import { Pencil, Trash2, Plus } from "lucide-react";
 import Modal from "@/app/components/Modal";
 import AddOskForm from "@/app/components/AddOskForm";
 import styles from "./AdminOskPageClient.module.css";
+import { useRouter } from "next/navigation";
 
 type Lesson = {
   id: string;
@@ -16,6 +17,7 @@ type Lesson = {
 };
 
 export default function AdminOskPageClient({ lessons }: { lessons: Lesson[] }) {
+  const router = useRouter();
   const [open, setOpen] = useState(false);
 
   const sortedLessons = useMemo(
@@ -55,6 +57,26 @@ export default function AdminOskPageClient({ lessons }: { lessons: Lesson[] }) {
       alert(err.message || "Something went wrong");
     } finally {
       setDeleting(false);
+    }
+  };
+  const [editTarget, setEditTarget] = useState<any | null>(null);
+  const [editLoading, setEditLoading] = useState(false);
+  const openEdit = async (id: string) => {
+    setEditLoading(true);
+
+    try {
+      const res = await fetch(`/api/admin/osk/${id}`);
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || "Failed to load lesson");
+      }
+
+      setEditTarget(data);
+    } catch (err: any) {
+      alert(err.message || "Something went wrong");
+    } finally {
+      setEditLoading(false);
     }
   };
 
@@ -135,12 +157,13 @@ export default function AdminOskPageClient({ lessons }: { lessons: Lesson[] }) {
 
                     <td className={styles.td}>
                       <div className={styles.actions}>
-                        <Link
-                          href={`/admin/osk/${ep.id}/edit`}
+                        <button
+                          onClick={() => openEdit(ep.id)}
                           className={styles.iconButton}
+                          title="Edit Lesson"
                         >
                           <Pencil size={16} />
-                        </Link>
+                        </button>
 
                         <button
                           onClick={() =>
@@ -168,8 +191,8 @@ export default function AdminOskPageClient({ lessons }: { lessons: Lesson[] }) {
         >
           <AddOskForm
             onSuccess={() => {
-              setOpen(false);
-              window.location.reload();
+              setOpen(false); // close modal
+              router.refresh(); // refresh admin list
             }}
           />
         </Modal>
@@ -243,6 +266,22 @@ export default function AdminOskPageClient({ lessons }: { lessons: Lesson[] }) {
               </button>
             </div>
           </div>
+        </Modal>
+
+        <Modal
+          open={!!editTarget}
+          onClose={() => setEditTarget(null)}
+          title="Edit OSK Lesson"
+        >
+          {editTarget && (
+            <AddOskForm
+              initialData={editTarget}
+              onSuccess={() => {
+                setEditTarget(null);
+                router.refresh();
+              }}
+            />
+          )}
         </Modal>
       </div>
     </section>

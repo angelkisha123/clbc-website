@@ -14,11 +14,13 @@ export async function POST(req: Request) {
 
     const { error } = await supabaseAdmin
       .from("osk")
-      .delete()
+      .update({
+        deleted_at: new Date().toISOString(),
+      })
       .eq("id", id);
 
     if (error) {
-      console.error("DELETE OSK ERROR:", error);
+      console.error("SOFT DELETE OSK ERROR:", error);
       return NextResponse.json(
         { error: "Failed to delete lesson" },
         { status: 500 }
@@ -27,7 +29,7 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ success: true });
   } catch (err) {
-    console.error("DELETE OSK API ERROR:", err);
+    console.error("SOFT DELETE OSK API ERROR:", err);
     return NextResponse.json(
       { error: "Server error" },
       { status: 500 }
