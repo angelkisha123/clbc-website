@@ -7,6 +7,7 @@ import Modal from "@/app/components/Modal";
 import AddOskForm from "@/app/components/AddOskForm";
 import styles from "./AdminOskPageClient.module.css";
 import { useRouter } from "next/navigation";
+import OskLessonView from "@/app/components/OskLessonView";
 
 type Lesson = {
   id: string;
@@ -79,6 +80,19 @@ export default function AdminOskPageClient({ lessons }: { lessons: Lesson[] }) {
       setEditLoading(false);
     }
   };
+  const [viewTarget, setViewTarget] = useState<any | null>(null);
+  const openView = async (id: string) => {
+    try {
+      const res = await fetch(`/api/admin/osk/${id}`);
+      const data = await res.json();
+
+      if (!res.ok) throw new Error(data.error);
+
+      setViewTarget(data);
+    } catch (err: any) {
+      alert(err.message || "Failed to load lesson");
+    }
+  };
 
   return (
     <section
@@ -123,7 +137,12 @@ export default function AdminOskPageClient({ lessons }: { lessons: Lesson[] }) {
 
               <tbody>
                 {sortedLessons.map((ep) => (
-                  <tr key={ep.id} className={styles.tr}>
+                  <tr
+                    key={ep.id}
+                    className={styles.tr}
+                    onClick={() => openView(ep.id)}
+                    style={{ cursor: "pointer" }}
+                  >
                     <td className={styles.td} align="center">
                       <span className={styles.lessonBadge}>
                         {ep.osk_number}
@@ -140,6 +159,7 @@ export default function AdminOskPageClient({ lessons }: { lessons: Lesson[] }) {
                           href={ep.facebook_url}
                           target="_blank"
                           rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
                           style={{ color: "#60a5fa", fontSize: "0.85rem" }}
                         >
                           View
@@ -158,7 +178,10 @@ export default function AdminOskPageClient({ lessons }: { lessons: Lesson[] }) {
                     <td className={styles.td}>
                       <div className={styles.actions}>
                         <button
-                          onClick={() => openEdit(ep.id)}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            openEdit(ep.id);
+                          }}
                           className={styles.iconButton}
                           title="Edit Lesson"
                         >
@@ -166,9 +189,10 @@ export default function AdminOskPageClient({ lessons }: { lessons: Lesson[] }) {
                         </button>
 
                         <button
-                          onClick={() =>
-                            setDeleteTarget({ id: ep.id, title: ep.title })
-                          }
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setDeleteTarget({ id: ep.id, title: ep.title });
+                          }}
                           className={`${styles.iconButton} ${styles.delete}`}
                           title="Delete Lesson"
                         >
@@ -281,6 +305,17 @@ export default function AdminOskPageClient({ lessons }: { lessons: Lesson[] }) {
                 router.refresh();
               }}
             />
+          )}
+        </Modal>
+        <Modal
+          open={!!viewTarget}
+          onClose={() => setViewTarget(null)}
+          title="OSK Lesson Preview"
+        >
+          {viewTarget && (
+            <div style={{ maxHeight: "80vh", padding: "1rem" }}>
+              <OskLessonView lesson={viewTarget} />
+            </div>
           )}
         </Modal>
       </div>
