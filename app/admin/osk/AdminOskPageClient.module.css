@@ -3,23 +3,13 @@
 .background {
   position: absolute;
   inset: 0;
-  background:
-    radial-gradient(
+  background: radial-gradient(
       circle at top,
       rgba(34, 211, 238, 0.08),
       transparent 45%
     ),
-    radial-gradient(
-      circle at bottom,
-      rgba(168, 85, 247, 0.08),
-      transparent 45%
-    ),
-    linear-gradient(
-      180deg,
-      #020617 0%,
-      #020617 40%,
-      #000000 100%
-    );
+    radial-gradient(circle at bottom, rgba(168, 85, 247, 0.08), transparent 45%),
+    linear-gradient(180deg, #020617 0%, #020617 40%, #000000 100%);
   pointer-events: none;
 }
 
@@ -94,7 +84,7 @@
 
 /* Cells */
 .td {
-  padding: .75rem 2rem;
+  padding: 0.75rem 2rem;
   vertical-align: middle;
 }
 
@@ -143,4 +133,68 @@
 
 .delete:hover {
   background: rgba(185, 6, 6, 0.4);
+}
+
+/* Tablets */
+@media (max-width: 1024px) {
+  .tableWrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .table {
+    min-width: 900px;
+    font-size: 0.85rem;
+  }
+}
+
+/* ================= Mobile ================= */
+
+@media (max-width: 640px) {
+  /* Header: OSK Lessons + Button -> column */
+  :global(.flex.items-center.justify-between.mb-5) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .addButton {
+    width: 100%;
+    justify-content: center;
+    font-size: 0.8rem;
+    padding: 0.6rem 1rem;
+  }
+
+  .table {
+    min-width: 820px;
+    font-size: 0.8rem;
+  }
+
+  .th {
+    font-size: 0.6rem;
+    padding: 0.75rem 1rem;
+  }
+
+  .td {
+    padding: 0.6rem 1rem;
+  }
+
+  .lessonBadge {
+    width: 2rem;
+    height: 2rem;
+    font-size: 0.75rem;
+  }
+
+  .actions {
+    gap: 0.5rem;
+  }
+
+  .iconButton {
+    padding: 0.55rem;
+  }
+
+  .iconButton svg {
+    width: 14px;
+    height: 14px;
+  }
 }

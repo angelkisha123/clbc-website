@@ -1,0 +1,135 @@
+/* ================= ABOUT SECTION ================= */
+
+.about {
+  position: relative;
+  color: white;
+  background: linear-gradient(
+    to bottom,
+    #020617,
+    #0f172a,
+    #020617
+  );
+  padding: 6rem 1rem;
+  overflow: hidden;
+}
+
+/* Background glows */
+.glowTop {
+  position: absolute;
+  top: -8rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 500px;
+  height: 500px;
+  background: rgba(236, 72, 153, 0.1);
+  filter: blur(160px);
+}
+
+.glowBottom {
+  position: absolute;
+  bottom: -6rem;
+  right: -4rem;
+  width: 400px;
+  height: 400px;
+  background: rgba(34, 211, 238, 0.1);
+  filter: blur(140px);
+}
+
+/* Container */
+.container {
+  position: relative;
+  max-width: 64rem;
+  margin: 0 auto;
+  text-align: center;
+  z-index: 1;
+}
+
+/* Title */
+.title {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(
+    to right,
+    #ec4899,
+    #a855f7,
+    #22d3ee
+  );
+  -webkit-background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 20px rgba(236, 72, 153, 0.35);
+}
+
+/* Description */
+.description {
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  line-height: 1.7;
+  color: #cbd5f5;
+  max-width: 48rem;
+  margin: 0 auto 3.5rem;
+}
+
+/* Card */
+.card {
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(34, 211, 238, 0.2);
+  border-radius: 1.5rem;
+  padding: 1.5rem;
+  box-shadow: 0 0 40px rgba(0, 255, 255, 0.08);
+  transition: border-color 0.4s ease;
+}
+
+.card:hover {
+  border-color: rgba(34, 211, 238, 0.4);
+}
+
+/* Image */
+.image {
+  width: 100%;
+  height: clamp(220px, 35vw, 350px);
+  object-fit: cover;
+  border-radius: 1.25rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+}
+
+/* Vision title */
+.visionTitle {
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  background: linear-gradient(
+    to right,
+    #22d3ee,
+    #ec4899
+  );
+  -webkit-background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 12px rgba(0, 255, 255, 0.4);
+}
+
+/* Vision text */
+.visionText {
+  font-size: clamp(0.95rem, 2.5vw, 1.125rem);
+  line-height: 1.7;
+  color: #d1d5db;
+  max-width: 40rem;
+  margin: 0 auto;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 768px) {
+  .about {
+    padding: 4.5rem 1rem;
+  }
+
+  .description {
+    margin-bottom: 3rem;
+  }
+
+  .card {
+    padding: 1.25rem;
+  }
+}

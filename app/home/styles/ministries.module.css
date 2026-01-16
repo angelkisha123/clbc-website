@@ -1,0 +1,203 @@
+/* ================= MINISTRIES ================= */
+
+.ministry {
+  position: relative;
+  padding: 6rem 1rem;
+  color: white;
+  overflow: hidden;
+
+  /* Base gradient */
+  background: linear-gradient(
+    to bottom,
+    #020617,
+    #0f172a,
+    #020617
+  );
+}
+
+/* ===== Background layers ===== */
+
+/* Subtle grid */
+.bgGrid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(34, 211, 238, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(34, 211, 238, 0.05) 1px, transparent 1px);
+  background-size: 50px 50px;
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+/* Pink glow */
+.bgGlowPink {
+  position: absolute;
+  top: -120px;
+  left: -120px;
+  width: 420px;
+  height: 420px;
+  background: rgba(236, 72, 153, 0.25);
+  filter: blur(160px);
+  pointer-events: none;
+}
+
+/* Cyan glow */
+.bgGlowCyan {
+  position: absolute;
+  bottom: -120px;
+  right: -120px;
+  width: 420px;
+  height: 420px;
+  background: rgba(34, 211, 238, 0.25);
+  filter: blur(160px);
+  pointer-events: none;
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 80rem;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* ================= Typography ================= */
+
+.title {
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  font-weight: 900;
+  margin-bottom: 0.75rem;
+  letter-spacing: 0.02em;
+
+  background: linear-gradient(
+    to right,
+    #ec4899,
+    #a855f7,
+    #22d3ee
+  );
+  -webkit-background-clip: text;
+  color: transparent;
+
+  text-shadow:
+    0 0 20px rgba(236, 72, 153, 0.5),
+    0 0 35px rgba(34, 211, 238, 0.35);
+}
+
+.subtitle {
+  max-width: 40rem;
+  margin: 0 auto 4rem;
+  font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+  line-height: 1.7;
+  color: #cbd5f5;
+  opacity: 0.85;
+}
+
+/* ================= Grid ================= */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 4rem;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ================= Image stack ================= */
+
+.stack {
+  position: relative;
+  width: 260px;
+  height: 340px;
+}
+
+.image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 1rem;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.45);
+  transition:
+    transform 0.5s ease,
+    z-index 0.3s ease,
+    box-shadow 0.4s ease;
+  cursor: pointer;
+}
+
+.img0 {
+  transform: translateX(0) rotate(-4deg);
+  z-index: 1;
+}
+
+.img1 {
+  transform: translateX(16px) rotate(2deg);
+  z-index: 2;
+}
+
+.img2 {
+  transform: translateX(32px) rotate(5deg);
+  z-index: 3;
+}
+
+/* Hover (desktop) */
+@media (hover: hover) {
+  .image:hover {
+    transform: scale(1.12);
+    z-index: 10;
+    box-shadow: 0 25px 60px rgba(34, 211, 238, 0.45);
+  }
+}
+
+/* Active (mobile tap) */
+.active {
+  transform: scale(1.12) !important;
+  z-index: 10;
+  box-shadow: 0 25px 60px rgba(236, 72, 153, 0.45);
+}
+
+/* ================= Ministry name ================= */
+
+.name {
+  margin-top: 1.75rem;
+  font-size: clamp(1.3rem, 3.5vw, 1.9rem);
+  font-weight: 800;
+  letter-spacing: 0.03em;
+
+  background: linear-gradient(
+    to right,
+    #ec4899,
+    #22d3ee
+  );
+  -webkit-background-clip: text;
+  color: transparent;
+
+  text-shadow:
+    0 0 12px rgba(236, 72, 153, 0.6),
+    0 0 22px rgba(34, 211, 238, 0.35);
+}
+
+/* ================= Responsive ================= */
+
+@media (max-width: 768px) {
+  .ministry {
+    padding: 4.5rem 1rem;
+  }
+
+  .stack {
+    width: 220px;
+    height: 300px;
+  }
+
+  .img1 {
+    transform: translateX(12px) rotate(2deg);
+  }
+
+  .img2 {
+    transform: translateX(24px) rotate(5deg);
+  }
+}

@@ -1,0 +1,156 @@
+/* ================= OSK SECTION ================= */
+
+.osk {
+  position: relative;
+  padding: 6rem 1.5rem;
+  text-align: center;
+  color: white;
+  overflow: hidden;
+  background: black;
+}
+
+/* Cyberpunk grid */
+.gridBg {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: 50px 50px;
+  mask-image: radial-gradient(
+    ellipse 80% 50% at 50% 50%,
+    black,
+    transparent
+  );
+}
+
+/* Animated gradient overlay */
+.gradientOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(14, 165, 233, 0.4),
+    rgba(168, 85, 247, 0.4),
+    rgba(236, 72, 153, 0.4)
+  );
+}
+
+/* Neon glows */
+.glowCyan {
+  position: absolute;
+  top: 0;
+  left: 25%;
+  width: 380px;
+  height: 380px;
+  background: rgba(34, 211, 238, 0.25);
+  filter: blur(120px);
+}
+
+.glowPink {
+  position: absolute;
+  bottom: 0;
+  right: 25%;
+  width: 380px;
+  height: 380px;
+  background: rgba(236, 72, 153, 0.25);
+  filter: blur(120px);
+}
+
+/* Scanline effect */
+.scanlines {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    transparent 50%,
+    rgba(0, 255, 255, 0.03) 50%
+  );
+  background-size: 100% 4px;
+  pointer-events: none;
+}
+
+/* Content */
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 60rem;
+  margin: 0 auto;
+}
+
+/* Title */
+.title {
+
+  font-size: clamp(2.25rem, 5vw, 3.5rem);
+  font-weight: 700;
+  place-self: center;
+  background: linear-gradient(
+    to right,
+    #22d3ee,
+    #a855f7,
+    #ec4899
+  );
+  -webkit-background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+}
+
+/* Description */
+.description {
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  line-height: 1.7;
+  color: #e5e7eb;
+  margin-bottom: 1.75rem;
+}
+
+/* Verse */
+.verse {
+  font-size: clamp(0.95rem, 2.5vw, 1.15rem);
+  font-style: italic;
+  color: #67e8f9;
+  margin-bottom: 2.5rem;
+}
+
+/* CTA */
+.cta {
+  display: inline-block;
+  padding: 0.6rem 1.75rem;
+  border-radius: 999px;
+  font-weight: 600;
+  color: white;
+  text-decoration: none;
+  background: linear-gradient(
+    to right,
+    #ec4899,
+    #a855f7,
+    #22d3ee
+  );
+  background-size: 200% 200%;
+  background-position: left;
+  box-shadow: 0 0 25px rgba(255, 0, 255, 0.6);
+  transition:
+    background-position 0.7s ease,
+    transform 0.3s ease;
+}
+
+.cta:hover {
+  background-position: right;
+  transform: scale(1.05);
+}
+.title img{
+    width: 500px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 768px) {
+  .osk {
+    padding: 4.5rem 1rem;
+  }
+  .title img{
+    width: 250px;
+}
+
+  .container {
+    max-width: 100%;
+  }
+}

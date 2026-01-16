@@ -1,0 +1,188 @@
+/* ================= GIVING ================= */
+
+.giving {
+  position: relative;
+  padding: clamp(4rem, 8vw, 6rem) clamp(1rem, 4vw, 1.5rem);
+  background: linear-gradient(to bottom, #0f172a, #020617, #0f172a);
+  color: white;
+  overflow: hidden;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 72rem;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* ================= HEADER ================= */
+
+.title {
+  font-size: clamp(2.2rem, 6vw, 4rem);
+  font-weight: 800;
+  margin-bottom: clamp(1rem, 3vw, 1.5rem);
+  background: linear-gradient(to right, #ec4899, #a855f7, #22d3ee);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.subtitle {
+  max-width: 48rem;
+  margin: 0 auto clamp(2.5rem, 6vw, 4rem);
+  color: #d1d5db;
+  font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+  line-height: 1.7;
+}
+
+.subtitle span {
+  color: #ec4899;
+  font-weight: 600;
+}
+
+/* ================= GRID ================= */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: clamp(1.75rem, 4vw, 2.5rem);
+  align-items: start; 
+}
+
+/* ================= CARD ================= */
+
+.card {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 1.75rem;
+  overflow: hidden;
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+  transition: transform 0.5s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+}
+
+/* ================= IMAGE ================= */
+
+.imageWrap {
+  overflow: hidden;
+}
+
+.imageWrap img {
+  width: 100%;
+  height: clamp(180px, 30vw, 220px);
+  object-fit: cover;
+  transition: transform 0.7s ease;
+}
+
+.card:hover img {
+  transform: scale(1.1);
+}
+
+/* ================= CARD BODY ================= */
+
+.cardBody {
+  padding: clamp(1.25rem, 3vw, 1.5rem);
+}
+
+.cardBody h3 {
+  font-size: clamp(1.25rem, 3.5vw, 1.5rem);
+  margin-bottom: 0.75rem;
+  text-shadow: 0 0 10px #ff66cc;
+}
+
+.cardBody p {
+  color: #d1d5db;
+  font-size: clamp(0.9rem, 2.5vw, 1rem);
+  line-height: 1.6;
+}
+
+/* ================= BUTTON ================= */
+
+.button {
+  display: inline-block;
+  padding: clamp(0.5rem, 2vw, 0.6rem)
+           clamp(1.4rem, 4vw, 1.75rem);
+  margin-top: clamp(1.25rem, 3vw, 1.5rem);
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+  color: white;
+  background: linear-gradient(to right, #ec4899, #a855f7, #22d3ee);
+  background-size: 200% 200%;
+  background-position: left;
+  transition: background-position 0.7s ease;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+}
+
+.button:hover {
+  background-position: right;
+}
+
+/* ================= FOOTER NOTE ================= */
+
+.note {
+  margin-top: clamp(3rem, 6vw, 4rem);
+  max-width: 48rem;
+  margin-left: auto;
+  margin-right: auto;
+  color: #9ca3af;
+  font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+  line-height: 1.7;
+}
+
+/* ================= QR REVEAL ================= */
+
+.qrBox {
+  margin-top: clamp(1rem, 3vw, 1.25rem);
+  padding: clamp(1rem, 3vw, 1.25rem);
+  border-radius: 1.25rem;
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(34, 211, 238, 0.3);
+  box-shadow: 0 0 40px rgba(34, 211, 238, 0.35);
+  animation: qrFadeIn 0.45s ease;
+}
+
+.qrBox img {
+  width: clamp(120px, 35vw, 160px);
+  height: clamp(120px, 35vw, 160px);
+  object-fit: contain;
+  margin: 0 auto 1rem;
+  display: block;
+  border-radius: 1rem;
+  background: white;
+  padding: 0.5rem;
+}
+
+.qrText {
+  font-size: clamp(0.8rem, 2.3vw, 0.9rem);
+  color: #e5e7eb;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+/* ================= ANIMATION ================= */
+
+@keyframes qrFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}

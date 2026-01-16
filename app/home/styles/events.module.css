@@ -1,0 +1,271 @@
+/* =========================
+   SECTION
+========================= */
+.section {
+  position: relative;
+  overflow: hidden;
+  padding: 5rem 1.25rem;
+  color: white;
+  background: #020617;
+}
+
+/* =========================
+   BOKEH BACKGROUND (WORKING)
+========================= */
+.bokeh {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.bokeh span {
+  position: absolute;
+
+  width: 26vmin;
+  height: 26vmin;
+
+  border-radius: 50%;
+  opacity: 0.45;
+  filter: blur(30px);
+
+  /* TWO INDEPENDENT MOTIONS */
+  animation:
+    float-x linear infinite alternate,
+    float-y linear infinite alternate;
+
+  will-change: transform;
+}
+
+
+/* =========================
+   COLORS (THEME)
+========================= */
+.bokeh span:nth-child(3n) {
+  background: rgba(34, 211, 238, 0.7);
+  box-shadow: 0 0 90px rgba(34, 211, 238, 0.55);
+}
+
+.bokeh span:nth-child(3n + 1) {
+  background: rgba(168, 85, 247, 0.7);
+  box-shadow: 0 0 90px rgba(168, 85, 247, 0.55);
+}
+
+.bokeh span:nth-child(3n + 2) {
+  background: rgba(236, 72, 153, 0.7);
+  box-shadow: 0 0 90px rgba(236, 72, 153, 0.55);
+}
+
+/* =========================
+   POSITIONS + UNIQUE VECTORS
+========================= */
+.bokeh span:nth-child(1)  { top: 10%; left: 15%; --x: 2200px; --y: -200px; animation-duration: 6s, 8s; }
+.bokeh span:nth-child(2)  { top: 20%; left: 65%; --x: -260px; --y: 210px; animation-duration: 7s, 9s; }
+.bokeh span:nth-child(3)  { top: 35%; left: 40%; --x: 240px; --y: 260px; animation-duration: 7s, 9s; }
+.bokeh span:nth-child(4)  { top: 50%; left: 80%; --x: -280px; --y: -240px; animation-duration: 8s, 11s; }
+.bokeh span:nth-child(5)  { top: 65%; left: 10%; --x: 260px; --y: -300px; animation-duration: 8s, 10s; }
+.bokeh span:nth-child(6)  { top: 75%; left: 55%; --x: -220px; --y: 280px; animation-duration: 9s, 12s; }
+.bokeh span:nth-child(7)  { top: 85%; left: 30%; --x: 300px; --y: 260px; animation-duration: 9s, 11s; }
+.bokeh span:nth-child(8)  { top: 15%; left: 50%; --x: -260px; --y: -220px; animation-duration: 7s, 8s; }
+.bokeh span:nth-child(9)  { top: 45%; left: 20%; --x: 280px; --y: 300px; animation-duration: 8s, 10s; }
+.bokeh span:nth-child(10) { top: 60%; left: 75%; --x: -240px; --y: -280px; animation-duration: 7s, 9s; }
+
+
+
+/* =========================
+   DRIFT ANIMATION (VISIBLE)
+========================= */
+@keyframes float-x {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(var(--x));
+  }
+}
+
+@keyframes float-y {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(var(--y));
+  }
+}
+
+/* =========================
+   CONTENT LAYER
+========================= */
+.contentWrapper {
+  position: relative;
+  z-index: 2;
+}
+
+/* =========================
+   HEADER
+========================= */
+.header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: 700;
+  background: linear-gradient(to right, #22d3ee, #a855f7, #ec4899);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.subtitle {
+  color: #d1d5db;
+  max-width: 38rem;
+  margin: 1rem auto 0;
+}
+
+/* =========================
+   TIMELINE
+========================= */
+.timelineWrapper {
+  position: relative;
+  max-width: 56rem;
+  margin: 0 auto;
+}
+
+.centerLine {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  transform: translateX(-50%);
+  background: linear-gradient(
+    to bottom,
+    #22d3ee,
+    #a855f7,
+    #ec4899
+  );
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .centerLine {
+    display: block;
+  }
+}
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+/* =========================
+   ROWS
+========================= */
+.row {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.rowReverse {
+  flex-direction: row;
+}
+
+@media (min-width: 1024px) {
+  .rowReverse {
+    flex-direction: row-reverse;
+  }
+}
+
+/* =========================
+   CARD
+========================= */
+.content {
+  flex: 1;
+}
+
+.card {
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(10px);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  border: 1px solid rgba(34, 211, 238, 0.3);
+}
+
+.cardTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  background: linear-gradient(to right, #22d3ee, #a855f7);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.cardDesc {
+  color: #d1d5db;
+  margin-top: 0.5rem;
+  line-height: 1.6;
+}
+
+/* =========================
+   ICON
+========================= */
+.iconWrapper {
+  display: none;
+  position: relative;
+}
+
+@media (min-width: 1024px) {
+  .iconWrapper {
+    display: block;
+  }
+}
+
+.icon {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  background: linear-gradient(to bottom right, #22d3ee, #a855f7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  animation: float 4s ease-in-out infinite;
+}
+
+.iconPing {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: rgba(34, 211, 238, 0.3);
+  animation: ping 1.5s infinite;
+}
+
+.spacer {
+  flex: 1;
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .spacer {
+    display: block;
+  }
+}
+
+/* =========================
+   ANIMATIONS
+========================= */
+@keyframes float {
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes ping {
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}

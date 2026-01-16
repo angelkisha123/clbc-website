@@ -1,0 +1,278 @@
+.join {
+  position: relative;
+  background-image: url("/images/orbs.jpg");
+  background-size: cover;
+  background-position: center;
+  padding: 6rem 1rem;
+  color: white;
+  overflow: hidden;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+/* Countdown */
+.countdown {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  color: #67e8f9;
+  font-weight: 600;
+}
+
+.countdown span {
+  color: #ec4899;
+}
+
+/* Container */
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 80rem;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* Title */
+.title {
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 700;
+  margin-bottom: 1.25rem;
+  background: linear-gradient(
+    to right,
+    #22d3ee,
+    #a855f7,
+    #ec4899
+  );
+  -webkit-background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+}
+
+/* Description */
+.description {
+  max-width: 48rem;
+  margin: 0 auto 4rem;
+  font-size: clamp(0.9rem, 2.5vw, 1.125rem);
+  color: #d1d5db;
+  line-height: 1.7;
+}
+
+/* Schedule grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+
+/* Card */
+.card {
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(34, 211, 238, 0.5);
+  border-radius: 1.5rem;
+  padding: 1.5rem;
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
+  transition: transform 0.3s ease;
+}
+
+/* Icon */
+.icon {
+  width: 3.5rem;
+  height: 3.5rem;
+  margin: 0 auto 1.25rem;
+  border-radius: 999px;
+  background: linear-gradient(
+    to bottom right,
+    #22d3ee,
+    #a855f7
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.75rem;
+  box-shadow: 0 0 25px rgba(0, 255, 255, 0.5);
+}
+
+/* Card content */
+.cardTitle {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+  background: linear-gradient(
+    to right,
+    #22d3ee,
+    #a855f7
+  );
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.time {
+  font-weight: 600;
+  color: #ec4899;
+  margin-bottom: 0.75rem;
+}
+
+.cardDesc {
+  font-size: 0.95rem;
+  color: #d1d5db;
+  line-height: 1.6;
+}
+
+/* ================= FACEBOOK SECTION ================= */
+
+.fbSection {
+  position: relative;
+  max-width: 42rem;
+  margin: 0 auto 4rem;
+  padding: 2.5rem 2rem;
+  background: rgba(15, 23, 42, 0.5);
+  backdrop-filter: blur(10px);
+  border-radius: 1.5rem;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  overflow: hidden;
+}
+
+.fbGlow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.15), transparent);
+  filter: blur(60px);
+  pointer-events: none;
+}
+
+.fbText {
+  position: relative;
+  z-index: 1;
+  font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+  color: #cbd5e1;
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+}
+
+.fbButton {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, #1877f2, #0c63d4);
+  color: white;
+  font-size: 1.05rem;
+  font-weight: 600;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 20px rgba(24, 119, 242, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.fbButton:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 30px rgba(24, 119, 242, 0.6);
+  background: linear-gradient(135deg, #0c63d4, #1877f2);
+}
+
+.fbButton:active {
+  transform: translateY(-1px) scale(1);
+}
+
+.fbIcon {
+  flex-shrink: 0;
+}
+
+.arrow {
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.fbButton:hover .arrow {
+  transform: translateX(4px);
+}
+
+.fbSubtext {
+  position: relative;
+  z-index: 1;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #94a3b8;
+  font-style: italic;
+}
+
+/* Map */
+.mapWrapper {
+  margin-top: 4rem;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  border: 1px solid rgba(34, 211, 238, 0.3);
+  box-shadow: 0 0 40px rgba(0, 255, 255, 0.2);
+}
+
+.mapWrapper iframe {
+  width: 100%;
+  height: 320px;
+  border: 0;
+}
+
+/* Location */
+.location {
+  margin-top: 2.5rem;
+  max-width: 48rem;
+  margin-left: auto;
+  margin-right: auto;
+  color: #d1d5db;
+  font-size: clamp(0.85rem, 2.5vw, 1.05rem);
+}
+
+.location span {
+  color: #67e8f9;
+  font-weight: 600;
+}
+
+.divider {
+  height: 1px;
+  margin-bottom: 1.25rem;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(168, 85, 247, 0.5),
+    transparent
+  );
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 768px) {
+  .join {
+    padding: 4.5rem 1rem;
+  }
+
+  .description {
+    margin-bottom: 3rem;
+  }
+
+  .fbSection {
+    padding: 1rem 1.5rem;
+  }
+
+  .fbButton {
+    padding: 0.05rem 1.5rem;
+    font-size: 1rem;
+  }
+
+  .mapWrapper iframe {
+    height: 260px;
+  }
+}

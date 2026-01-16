@@ -313,7 +313,7 @@ export default function AdminOskPageClient({ lessons }: { lessons: Lesson[] }) {
           title="OSK Lesson Preview"
         >
           {viewTarget && (
-            <div style={{ maxHeight: "80vh", padding: "1rem" }}>
+            <div style={{ maxHeight: "80vh" }}>
               <OskLessonView lesson={viewTarget} />
             </div>
           )}
