@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
-import { Pencil, Trash2, Plus } from "lucide-react";
+import { Pencil, Trash2, Plus, LogOut } from "lucide-react";
 import Modal from "@/app/components/Modal";
 import AddOskForm from "@/app/components/AddOskForm";
 import styles from "./AdminOskPageClient.module.css";
@@ -20,10 +20,11 @@ type Lesson = {
 export default function AdminOskPageClient({ lessons }: { lessons: Lesson[] }) {
   const router = useRouter();
   const [open, setOpen] = useState(false);
+  const [loggingOut, setLoggingOut] = useState(false);
 
   const sortedLessons = useMemo(
     () => [...lessons].sort((a, b) => a.osk_number - b.osk_number),
-    [lessons]
+    [lessons],
   );
   const [deleteTarget, setDeleteTarget] = useState<{
     id: string;
@@ -31,7 +32,25 @@ export default function AdminOskPageClient({ lessons }: { lessons: Lesson[] }) {
   } | null>(null);
 
   const [deleting, setDeleting] = useState(false);
+  const handleLogout = async () => {
+    setLoggingOut(true);
 
+    try {
+      const res = await fetch("/api/auth/logout", {
+        method: "POST",
+      });
+
+      if (!res.ok) {
+        throw new Error("Logout failed");
+      }
+
+      router.push("/admin/login");
+      router.refresh();
+    } catch (err: any) {
+      alert(err.message || "Logout failed");
+      setLoggingOut(false);
+    }
+  };
   const handleConfirmDelete = async () => {
     if (!deleteTarget) return;
 
@@ -112,11 +131,21 @@ export default function AdminOskPageClient({ lessons }: { lessons: Lesson[] }) {
               Manage lessons and content
             </p>
           </div>
+          <div style={{ display: "flex", gap: "0.75rem" }}>
+            <button
+              onClick={handleLogout}
+              disabled={loggingOut}
+              className={`${styles.addButton} ${styles.logoutButton}`}
+            >
+              <LogOut size={18} />
+              {loggingOut ? "Logging out..." : "Logout"}
+            </button>
 
-          <button onClick={() => setOpen(true)} className={styles.addButton}>
-            <Plus size={18} />
-            Add Lesson
-          </button>
+            <button onClick={() => setOpen(true)} className={styles.addButton}>
+              <Plus size={18} />
+              Add Lesson
+            </button>
+          </div>
         </div>
 
         {/* Table */}
@@ -130,7 +159,7 @@ export default function AdminOskPageClient({ lessons }: { lessons: Lesson[] }) {
                       <th key={label} className={styles.th}>
                         <span>{label}</span>
                       </th>
-                    )
+                    ),
                   )}
                 </tr>
               </thead>
@@ -261,14 +290,7 @@ export default function AdminOskPageClient({ lessons }: { lessons: Lesson[] }) {
               <button
                 onClick={() => setDeleteTarget(null)}
                 disabled={deleting}
-                style={{
-                  padding: "0.5rem 1.25rem",
-                  borderRadius: "0.6rem",
-                  background: "rgba(255,255,255,0.08)",
-                  color: "#e5e7eb",
-                  border: "1px solid rgba(255,255,255,0.15)",
-                  cursor: "pointer",
-                }}
+                className={styles.deleteButton}
               >
                 Cancel
               </button>
@@ -313,7 +335,7 @@ export default function AdminOskPageClient({ lessons }: { lessons: Lesson[] }) {
           title="OSK Lesson Preview"
         >
           {viewTarget && (
-            <div style={{ maxHeight: "80vh" }}>
+            <div className={styles.previewContainer}>
               <OskLessonView lesson={viewTarget} />
             </div>
           )}

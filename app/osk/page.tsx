@@ -1,10 +1,12 @@
 export const dynamic = "force-dynamic";
 
-import { supabaseServer } from "@/lib/supabase-server";
+import { createClient } from "@/lib/supabase-server";
 import Link from "next/link";
 
 export default async function OskPage() {
-  const { data: lessons, error } = await supabaseServer
+  const supabase = await createClient();
+  
+  const { data: lessons, error } = await supabase
     .from("osk")
     .select("id, osk_number, title, image_url")
     .eq("published", true)
@@ -25,7 +27,7 @@ export default async function OskPage() {
           </h1>
           <p className="text-gray-400 mt-4 max-w-2xl mx-auto text-lg">
             Weekly messages designed to encourage growth, faith, and reflection
-            through God’s Word.
+            through God's Word.
           </p>
         </div>
 

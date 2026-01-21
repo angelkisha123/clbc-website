@@ -3,12 +3,13 @@
 .background {
   position: absolute;
   inset: 0;
-  background: radial-gradient(
-      circle at top,
-      rgba(34, 211, 238, 0.08),
+  background:
+    radial-gradient(circle at top, rgba(34, 211, 238, 0.08), transparent 45%),
+    radial-gradient(
+      circle at bottom,
+      rgba(168, 85, 247, 0.08),
       transparent 45%
     ),
-    radial-gradient(circle at bottom, rgba(168, 85, 247, 0.08), transparent 45%),
     linear-gradient(180deg, #020617 0%, #020617 40%, #000000 100%);
   pointer-events: none;
 }
@@ -131,8 +132,32 @@
   background: rgba(13, 83, 235, 0.3);
 }
 
+.previewContainer {
+  max-height: 80vh;
+  overflow-y: auto;
+}
 .delete:hover {
   background: rgba(185, 6, 6, 0.4);
+}
+
+.deleteButton {
+  padding: 0.5rem 1.25rem;
+  border-radius: 0.6rem;
+  background: #dc2626;
+  color: white !important;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.deleteButton:hover {
+  background: #b91c1c;
+}
+
+.deleteButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 /* Tablets */

@@ -1,13 +1,15 @@
 import { NextResponse } from "next/server";
-import { supabaseServer } from "@/lib/supabase-server";
+import { createClient } from "@/lib/supabase-server";
 
 export async function GET(
   _: Request,
   context: { params: Promise<{ id: string }> }
 ) {
-  const { id } = await context.params; // ✅ THIS IS THE FIX
+  const { id } = await context.params;
+  
+  const supabase = await createClient(); // ✅ Create client instance
 
-  const { data, error } = await supabaseServer
+  const { data, error } = await supabase
     .from("osk")
     .select("*")
     .eq("id", id)

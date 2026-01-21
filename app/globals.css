@@ -39,6 +39,10 @@ body {
   font-family: "Playlist", cursive;
 }
 
+.main-offset {
+  padding-top: 70px;
+}
+
 @keyframes orbSlow {
   0% {
     transform: translate(0, 0) scale(1);

@@ -25,13 +25,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Header />
         {/* Offset for fixed header */}
-        <main style={{ paddingTop:"70px" }}>{children}</main>
+        <main className="main-offset">{children}</main>
         <Footer />
       </body>
     </html>
